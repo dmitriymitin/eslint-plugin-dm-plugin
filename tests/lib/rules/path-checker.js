@@ -29,20 +29,22 @@ ruleTester.run("path-checker", rule, {
   ],
 
   invalid: [
-    // {
-    //   filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
-    //   code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/slices/addCommentFormSlice'",
-    //   errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
-    //   options: [
-    //     {
-    //       alias: '@'
-    //     }
-    //   ]
-    // },
-    // {
-    //   filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
-    //   code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
-    //   errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
-    // },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/slices/addCommentFormSlice'",
+      output: "import { addCommentFormActions, addCommentFormReducer } from './Article/model/slices/addCommentFormSlice'",
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+      options: [
+        {
+          alias: '@'
+        }
+      ]
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
+      code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
+      output: "import { addCommentFormActions, addCommentFormReducer } from './Article/model/slices/addCommentFormSlice'",
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+    },
   ],
 });

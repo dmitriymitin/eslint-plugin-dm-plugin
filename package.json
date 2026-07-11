@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-dm-plugin",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "plugin for production project",
   "keywords": [
     "eslint",
