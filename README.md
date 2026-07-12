@@ -126,6 +126,12 @@ import { ArticleMock } from '@/entities/Article/testing'
 
 Такие импорты разрешены только в файлах, которые подходят под `testFilesPatterns`
 
+Также разрешен mock public API:
+
+```ts
+import { ArticleMock } from '@/entities/Article/mock'
+```
+
 ### `dm-plugin/path-checker`
 
 Требует относительные импорты внутри одного слайса

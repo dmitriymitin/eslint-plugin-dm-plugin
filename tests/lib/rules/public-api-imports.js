@@ -43,6 +43,11 @@ ruleTester.run("public-api-imports", rule, {
       options: aliasOptions,
     },
     {
+      code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/mock'",
+      errors: [],
+      options: aliasOptions,
+    },
+    {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\file.test.ts',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/testing'",
       errors: [],
@@ -83,12 +88,6 @@ ruleTester.run("public-api-imports", rule, {
         alias: '@',
         testFilesPatterns: ['**/*.test.ts', '**/*.test.ts', '**/StoreDecorator.tsx']
       }],
-    },
-    {
-      code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/mock'",
-      output: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article'",
-      errors: [{message: 'Абсолютный импорт разрешен только из Public API (index.ts)'}],
-      options: aliasOptions,
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\forbidden.ts',
