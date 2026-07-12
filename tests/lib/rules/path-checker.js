@@ -26,6 +26,11 @@ ruleTester.run("path-checker", rule, {
       code: "import { addCommentFormActions, addCommentFormReducer } from '../../model/slices/addCommentFormSlice'",
       errors: [],
     },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '../model/slices/addCommentFormSlice'",
+      errors: [],
+    },
   ],
 
   invalid: [
@@ -45,6 +50,27 @@ ruleTester.run("path-checker", rule, {
       code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
       output: "import { addCommentFormActions, addCommentFormReducer } from './Article/model/slices/addCommentFormSlice'",
       errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\src-tools\\production_project\\src\\entities\\Article',
+      code: "import { addCommentFormActions, addCommentFormReducer } from 'entities/Article/model/slices/addCommentFormSlice'",
+      output: "import { addCommentFormActions, addCommentFormReducer } from './Article/model/slices/addCommentFormSlice'",
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '..'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '../index'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Profile\\ui\\ProfileCard.tsx',
+      code: "import { articleReducer } from '../../Article'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
     },
   ],
 });

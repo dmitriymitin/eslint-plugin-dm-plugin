@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-dm-plugin",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "plugin for production project",
   "keywords": [
     "eslint",
@@ -10,7 +10,6 @@
   "author": "dm",
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint .",
     "test": "mocha tests --recursive"
   },
   "dependencies": {

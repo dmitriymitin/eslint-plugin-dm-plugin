@@ -42,6 +42,12 @@ ruleTester.run("layer-imports", rule, {
       options: aliasOptions,
     },
     {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
+      code: "import { addCommentFormActions, addCommentFormReducer } from 'some-package/@/features/Article'",
+      errors: [],
+      options: aliasOptions,
+    },
+    {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\index.tsx',
       code: "import { StoreProvider } from '@/app/providers/StoreProvider';",
       errors: [],
@@ -74,6 +80,12 @@ ruleTester.run("layer-imports", rule, {
   invalid: [
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\providers',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '@/features/Articl'",
+      errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
+      options: aliasOptions,
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\src-tools\\production_project\\src\\entities\\providers',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/features/Articl'",
       errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
       options: aliasOptions,
