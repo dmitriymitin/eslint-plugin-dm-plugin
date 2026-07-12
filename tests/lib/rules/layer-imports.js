@@ -9,6 +9,7 @@ const aliasOptions = [
 
 const layerImportError = "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)";
 const entityCrossImportError = "Сущности могут импортировать другие сущности только через @x public API";
+const entityCrossImportTargetError = "@x public API должен быть предназначен для текущей сущности";
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
@@ -121,7 +122,7 @@ ruleTester.run("layer-imports", rule, {
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\model\\types.ts',
       code: "import { User } from '@/entities/User/@x/Profile'",
-      errors: [{ message: entityCrossImportError}],
+      errors: [{ message: entityCrossImportTargetError}],
       options: aliasOptions,
     },
   ],

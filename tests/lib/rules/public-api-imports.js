@@ -84,6 +84,11 @@ ruleTester.run("public-api-imports", rule, {
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/storybook'",
       errors: [],
       options: storybookPublicApiOptions,
+    },
+    {
+      code: "import { User } from '@/entities/User/@x/Article'",
+      errors: [],
+      options: aliasOptions,
     }
   ],
 

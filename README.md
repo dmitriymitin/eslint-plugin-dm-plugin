@@ -108,6 +108,13 @@ import { User } from '@/entities/User'
 import { User } from '@/entities/User/@x/Article'
 ```
 
+Если `@x` указан не для текущей сущности, импорт будет считаться ошибкой:
+
+```ts
+// src/entities/Article/model/types.ts
+import { User } from '@/entities/User/@x/Profile'
+```
+
 Можно игнорировать отдельные импорты:
 
 ```json
@@ -127,6 +134,8 @@ import { User } from '@/entities/User/@x/Article'
 Запрещает глубокие абсолютные импорты внутрь слайса
 
 Слайс должен импортироваться через public API
+
+`@x` public API для entity cross-import не исправляется в обычный public API
 
 Неправильно:
 
