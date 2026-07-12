@@ -72,7 +72,7 @@ ruleTester.run("path-checker", rule, {
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
       code: "import { articleReducer } from '@/entities/Article'",
-      output: null,
+      output: "import { articleReducer } from '..'",
       errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
       options: [
         {
@@ -83,7 +83,7 @@ ruleTester.run("path-checker", rule, {
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
       code: "import { articleReducer } from '@/entities/Article/model/index'",
-      output: null,
+      output: "import { articleReducer } from '../model/index'",
       errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
       options: [
         {
@@ -94,7 +94,7 @@ ruleTester.run("path-checker", rule, {
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
       code: "import { articleReducer } from '@/entities/Article/testing'",
-      output: null,
+      output: "import { articleReducer } from '../testing'",
       errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
       options: [
         {
