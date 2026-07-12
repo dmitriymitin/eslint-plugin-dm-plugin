@@ -51,6 +51,7 @@ npm install eslint --save-dev
       "error",
       {
         "alias": "@",
+        "autoFix": true,
         "publicApiImports": [
           "mock",
           {
@@ -64,7 +65,31 @@ npm install eslint --save-dev
     "dm-plugin/path-checker": [
       "error",
       {
-        "alias": "@"
+        "alias": "@",
+        "autoFix": true
+      }
+    ]
+  }
+}
+```
+
+Если нужно только подсвечивать ошибки без автоисправлений при запуске ESLint с `--fix`, передай `autoFix: false`:
+
+```json
+{
+  "rules": {
+    "dm-plugin/public-api-imports": [
+      "warn",
+      {
+        "alias": "@",
+        "autoFix": false
+      }
+    ],
+    "dm-plugin/path-checker": [
+      "warn",
+      {
+        "alias": "@",
+        "autoFix": false
       }
     ]
   }

@@ -58,6 +58,18 @@ ruleTester.run("path-checker", rule, {
       errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
     },
     {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article',
+      code: "import { addCommentFormActions, addCommentFormReducer } from '@/entities/Article/model/slices/addCommentFormSlice'",
+      output: null,
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+      options: [
+        {
+          alias: '@',
+          autoFix: false
+        }
+      ]
+    },
+    {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
       code: "import { articleReducer } from '..'",
       errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
