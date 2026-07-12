@@ -51,7 +51,14 @@ npm install eslint --save-dev
       "error",
       {
         "alias": "@",
-        "testFilesPatterns": ["**/*.test.ts", "**/*.test.tsx"]
+        "publicApiImports": [
+          "mock",
+          {
+            "testing": {
+              "filePatterns": ["**/*.test.ts", "**/*.test.tsx"]
+            }
+          }
+        ]
       }
     ],
     "dm-plugin/path-checker": [
@@ -118,18 +125,54 @@ import { articleReducer } from '@/entities/Article/model/slice'
 import { articleReducer } from '@/entities/Article'
 ```
 
-Правило также поддерживает testing public API:
+Дополнительные public API сегменты задаются через `publicApiImports`
 
-```ts
-import { ArticleMock } from '@/entities/Article/testing'
+Если указать строку, такой public API будет доступен везде:
+
+```json
+{
+  "dm-plugin/public-api-imports": [
+    "error",
+    {
+      "alias": "@",
+      "publicApiImports": ["testing", "mock", "storybook"]
+    }
+  ]
+}
 ```
 
-Такие импорты разрешены только в файлах, которые подходят под `testFilesPatterns`
-
-Также разрешен mock public API:
+После этого такие импорты будут разрешены:
 
 ```ts
 import { ArticleMock } from '@/entities/Article/mock'
+import { ArticleStory } from '@/entities/Article/storybook'
+```
+
+Если public API должен быть доступен только в специальных файлах, укажи объект с `filePatterns`:
+
+```json
+{
+  "dm-plugin/public-api-imports": [
+    "error",
+    {
+      "alias": "@",
+      "publicApiImports": [
+        "mock",
+        {
+          "testing": {
+            "filePatterns": ["**/*.test.ts", "**/*.test.tsx"]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+В таком случае импорт будет разрешен только в файлах, которые подходят под `filePatterns`:
+
+```ts
+import { ArticleMock } from '@/entities/Article/testing'
 ```
 
 ### `dm-plugin/path-checker`
