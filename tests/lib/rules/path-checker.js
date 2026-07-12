@@ -71,6 +71,40 @@ ruleTester.run("path-checker", rule, {
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '@/entities/Article'",
+      output: null,
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+      options: [
+        {
+          alias: '@'
+        }
+      ]
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '@/entities/Article/model/index'",
+      output: null,
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+      options: [
+        {
+          alias: '@'
+        }
+      ]
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '@/entities/Article/testing'",
+      output: null,
+      errors: [{ message: "В рамках одного слайса все пути должны быть относительными"}],
+      options: [
+        {
+          alias: '@',
+          forbiddenRelativeImports: ['testing', 'mock']
+        }
+      ]
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
       code: "import { articleReducer } from '..'",
       errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
     },
@@ -81,8 +115,33 @@ ruleTester.run("path-checker", rule, {
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Profile\\ui\\ProfileCard.tsx',
+      code: "import { articleReducer } from '../../Article/index'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Profile\\ui\\ProfileCard.tsx',
       code: "import { articleReducer } from '../../Article'",
       errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '../testing'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+      options: [
+        {
+          forbiddenRelativeImports: ['testing', 'mock']
+        }
+      ]
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\ui\\ArticleCard.tsx',
+      code: "import { articleReducer } from '../mock'",
+      errors: [{ message: "Относительный импорт из public API запрещен, импортируйте напрямую из файла"}],
+      options: [
+        {
+          forbiddenRelativeImports: ['testing', 'mock']
+        }
+      ]
     },
   ],
 });

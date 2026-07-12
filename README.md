@@ -66,7 +66,8 @@ npm install eslint --save-dev
       "error",
       {
         "alias": "@",
-        "autoFix": true
+        "autoFix": true,
+        "forbiddenRelativeImports": ["testing", "mock"]
       }
     ]
   }
@@ -246,12 +247,38 @@ import { articleReducer } from '@/entities/Article/model/slice'
 import { articleReducer } from '../model/slice'
 ```
 
-Неправильно:
+Относительный импорт не должен заканчиваться корнем слайса или `index` файлом:
+
+```ts
+import { articleReducer } from '..'
+import { articleReducer } from '../index'
+import { articleReducer } from '../../Article'
+import { articleReducer } from '../../Article/index'
+```
+
+Можно запретить дополнительные конечные сегменты через `forbiddenRelativeImports`:
+
+```json
+{
+  "dm-plugin/path-checker": [
+    "error",
+    {
+      "alias": "@",
+      "forbiddenRelativeImports": ["testing", "mock"]
+    }
+  ]
+}
+```
+
+После этого такие относительные импорты будут запрещены:
 
 ```ts
 // src/entities/Article/ui/ArticleCard.tsx
-import { articleReducer } from '..'
+import { ArticleMock } from '../testing'
+import { ArticleMock } from '../mock'
 ```
+
+Автофикс не будет заменять абсолютный импорт на относительный путь, если результат попадет под эти ограничения
 
 Неправильно:
 
