@@ -6,6 +6,10 @@ const aliasOptions = [
     alias: '@'
   }
 ]
+
+const layerImportError = "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)";
+const entityCrossImportError = "Сущности могут импортировать другие сущности только через @x public API";
+
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: 'module' },
 });
@@ -48,6 +52,12 @@ ruleTester.run("layer-imports", rule, {
       options: aliasOptions,
     },
     {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\model\\types.ts',
+      code: "import { User } from '@/entities/User/@x/Article'",
+      errors: [],
+      options: aliasOptions,
+    },
+    {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\index.tsx',
       code: "import { StoreProvider } from '@/app/providers/StoreProvider';",
       errors: [],
@@ -81,25 +91,37 @@ ruleTester.run("layer-imports", rule, {
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\providers',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/features/Articl'",
-      errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
+      errors: [{ message: layerImportError}],
       options: aliasOptions,
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\src-tools\\production_project\\src\\entities\\providers',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/features/Articl'",
-      errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
+      errors: [{ message: layerImportError}],
       options: aliasOptions,
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\features\\providers',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/widgets/Articl'",
-      errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
+      errors: [{ message: layerImportError}],
       options: aliasOptions,
     },
     {
       filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\providers',
       code: "import { addCommentFormActions, addCommentFormReducer } from '@/widgets/Articl'",
-      errors: [{ message: "Слой может импортировать в себя только нижележащие слои (shared, entities, features, widgets, pages, app)"}],
+      errors: [{ message: layerImportError}],
+      options: aliasOptions,
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\model\\types.ts',
+      code: "import { User } from '@/entities/User'",
+      errors: [{ message: entityCrossImportError}],
+      options: aliasOptions,
+    },
+    {
+      filename: 'C:\\Users\\dm\\Desktop\\javascript\\production_project\\src\\entities\\Article\\model\\types.ts',
+      code: "import { User } from '@/entities/User/@x/Profile'",
+      errors: [{ message: entityCrossImportError}],
       options: aliasOptions,
     },
   ],

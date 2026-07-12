@@ -83,7 +83,8 @@ npm install eslint --save-dev
 - `pages` может импортировать из `widgets`, `features`, `entities`, `shared`
 - `widgets` может импортировать из `features`, `entities`, `shared`
 - `features` может импортировать из `entities`, `shared`
-- `entities` может импортировать из `entities`, `shared`
+- `entities` может импортировать из `shared`
+- `entities` может импортировать другие `entities` только через `@x` public API
 - `shared` может импортировать только из `shared`
 
 Пример неправильного импорта:
@@ -91,6 +92,20 @@ npm install eslint --save-dev
 ```ts
 // src/entities/Article/ui/Article.tsx
 import { login } from '@/features/Auth'
+```
+
+Пример неправильного импорта между сущностями:
+
+```ts
+// src/entities/Article/model/types.ts
+import { User } from '@/entities/User'
+```
+
+Пример правильного импорта между сущностями:
+
+```ts
+// src/entities/Article/model/types.ts
+import { User } from '@/entities/User/@x/Article'
 ```
 
 Можно игнорировать отдельные импорты:
